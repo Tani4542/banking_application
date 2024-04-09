@@ -14,10 +14,6 @@ from tkinter.ttk import Combobox,Treeview,Style,Scrollbar
 import io
 from PIL import Image, ImageTk
 import webbrowser
-# curobj.execute("create table user(user_id integer primary key autoincrement,account_no text, first_name text, last_name text,dob text, gender text, father_name text,mother_name text, mobile_no text,email text,aadhar_no text, account_type text,nominee_name text ,nominee_relation text,address_1 text,address_2 text,pin_code text, city text,state text country text, password text,user_image BLOB,account_create_date_time text)")
-    # curobj.execute("create table balance(user_id integer, balance float, created_date_time text)")
-    # curobj.execute("create table txns(txns_id int,user_id int,txn_acn_no int,txn_amt float,txn_type text,txn_update_bal float,txn_date text)")
-
 
 try:
     conobj = sqlite3.connect(database="banking.sqlite")
@@ -126,26 +122,19 @@ footer.place(relx=0.35,rely=0.95)
 def callback(url):
    webbrowser.open_new_tab(url)
 
-# img=PhotoImage(file='facebooklogo.png').subsample(17,17)
-# label_img = Label(win, image=img,border=0)
-# label_img.image = img
-# label_img.bind("<Button-1>", lambda e:
-# callback(""))
-# label_img.place(relx=.46,rely=.91)
-
 ins_img=PhotoImage(file='instagram.png').subsample(7,7)
 label_img = Label(win, image=ins_img,border=0)
 label_img.image = ins_img
 label_img.bind("<Button-1>", lambda e:
 callback("https://www.instagram.com/tanish.chaudhary702/"))
-label_img.place(relx=.49,rely=.91)
+label_img.place(relx=.45,rely=.91)
 
 lin_img=PhotoImage(file='linkedin.png').subsample(6,6)
 label_img = Label(win, image=lin_img,border=0)
 label_img.image = lin_img
 label_img.bind("<Button-1>", lambda e:
 callback("https://www.linkedin.com/learning/"))
-label_img.place(relx=.52,rely=.91)
+label_img.place(relx=.47,rely=.91)
 
 total_seconds = 2 * 60
 
@@ -207,9 +196,7 @@ def home_screen():
     
     heading=Label(frm,text='Sign in', fg='#052c65',bg='white',font=('arial',23,'bold','underline'))
     heading.place(relx=.57,rely=.1)
-    
-    
-    
+      
         
     def on_enter(e):
         acn_entry.delete(0,'end')
@@ -271,13 +258,7 @@ def home_screen():
     btn_pro_img = Button(frm, image=show_img, bg="white", border=0, command=toggle_password_visibility)
     btn_pro_img.image = show_img
     btn_pro_img.place(relx=0.78, rely=0.29)
-    
-    # img=PhotoImage(file='images-removebg-preview.png')
-    # img = img.subsample(9, 9)
-    # btn_pro_img = Button(frm, image=img, bg="white", border=0,command=pass_clear)
-    # btn_pro_img.image = img
-    # btn_pro_img.place(relx=0.78, rely=0.3)
-    
+
     btn_recpass=Button(frm,font=('arial',9,'bold','underline'),text="Forgot Password",bg='white',cursor='hand2',fg='#0d6efd',width=15,border=0,command=recover_click)
     btn_recpass.place(relx=.7,rely=.42)
     
@@ -648,8 +629,6 @@ def openaccount_next_screen(f_name,l_name,dob,gender,father_name,mother_name,mob
                         conobj.close()
                         try:
                             con = gmail.GMail("chaudharyshivam702@gmail.com", "")
-                            # cre_gen = gmail.Message(to=f"{email}", subject="Your account has been successfully created.", text=f"Dear {f_name}{l_name},\n\nCongratulations! You have successfully create an account. Your bank account number {new_account_number}. Y0u can now use banking funds from your account number and passwoerd to this bank account. \nPlease do not share this account number and Password with anyone.\n\n\nWarm Regards,\nCustomer Care\nBank.")
-
 
                             cre_gen = gmail.message(to=email, subject="Your account has been successfully created.", text=f"Dear {f_name} {l_name},\n\nCongratulations! You have successfully created an account. Your bank account number is {new_account_number}. You can now use banking funds from your account. Please do not share this account number and password with anyone.\n\nWarm Regards,\nCustomer Care\nBank.")
 
@@ -900,65 +879,6 @@ def recoverpass_screen():
     def home_click():
         frm.destroy()
         home_screen()
-    # def get_otp_click():
-    #     account=acn_entry.get()
-    #     email=email_entry.get()
-    #     mobile=mob_entry.get()
-    #     conobj=sqlite3.connect(database='banking.sqlite')
-    #     curobj=conobj.cursor()
-    #     curobj.execute("SELECT account_no,first_name,last_name,mobile_no,email FROM user_details WHERE account_no=? and email=? and mobile_no=?",(account,email,mobile))
-    #     tup=curobj.fetchone()
-    #     curobj.close()
-    #     print(tup)
-        
-    #     if len(account)==0 and len(email)==0 and len(mobile)==0:
-    #         Frame(frm,width=362,height=2,bg='red').place(relx=.45,rely=.3)
-    #         error_account = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_account.place(relx=.45, rely=.31)
-            
-    #         Frame(frm,width=362,height=2,bg='black').place(relx=.45,rely=.4)
-    #         error_email = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_email.place(relx=.45, rely=.41)
-            
-    #         Frame(frm,width=362,height=2,bg='black').place(relx=.45,rely=.5)
-    #         error_mob = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_mob.place(relx=.45, rely=.31)
-    #     elif len(account)==0:
-    #         Frame(frm,width=362,height=2,bg='red').place(relx=.45,rely=.3)
-    #         error_account = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_account.place(relx=.45, rely=.31)
-    #     elif len(email)==0:
-    #         Frame(frm,width=362,height=2,bg='black').place(relx=.45,rely=.4)
-    #         error_email = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_email.place(relx=.45, rely=.41)
-    #     elif len(mobile)==0:
-    #         Frame(frm,width=362,height=2,bg='black').place(relx=.45,rely=.5)
-    #         error_mob = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Empty fields are not allowed")
-    #         error_mob.place(relx=.45, rely=.51)
-    #     elif account==tup[2]:
-    #         Frame(frm,width=362,height=2,bg='red').place(relx=.45,rely=.3)
-    #         error_account = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Account Number not match.")
-    #         error_account.place(relx=.45, rely=.31)
-    #     elif mobile==tup[3]:
-    #         Frame(frm,width=362,height=2,bg='red').place(relx=.45,rely=.5)
-    #         error_mob = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Mobile Number not match.")
-    #         error_mob.place(relx=.45, rely=.51)
-    #     elif email==tup[4]:
-    #         Frame(frm,width=362,height=2,bg='red').place(relx=.45,rely=.4)
-    #         error_email = Label(frm, font=('arial', 8, 'bold'), bg='white', fg='red', border=0, text="Email Id not match.")
-    #         error_email.place(relx=.45, rely=.41)
-    #     else:
-    #         try:
-    #             otp = random.randint(100000, 999999)
-    #             con = gmail.GMail("chaudharyshivam702@gmail.com", "")
-    #             otp_gen = gmail.Message(to=f"{email}", subject="One Time Password (OTP) for Account recovery process on Bank", text=f"Dear Nitish Pandey,\n\nYour One Time Password (OTP) for Forgot Password recovery of Account No. {account} on BANK is {otp}.\n\nPlease note, this OTP is valid only for mentioned transaction and cannot be used for any other transaction.\nPlease do not share this One Time Password with anyone.\n\n\nWarm Regards,\nCustomer Care\nBank.")
-    #             con.send(otp_gen)
-    #             frm.destroy()
-    #             get_otp_screen(otp,email,account)
-    #         except:
-    #             messagebox.showinfo("Server Error","Server Not available! please try again.")
-    #             frm.destroy()
-    #             home_screen()
     def get_otp_click():
      
         account = acn_entry.get()
@@ -1562,28 +1482,7 @@ def welcome_screen():
             dob_entry.place(relx=.2,rely=.2)
             dob_entry.insert(0,tup[4])
             Frame(ifrm,width=220,height=1,bg='black').place(relx=.2,rely=.26)
-    
-            # def select_one(checkbox):
-            #     if checkbox == "male":
-            #         female_var.set(0)
-            #         other_var.set(0)
-            #     elif checkbox == "female":
-            #         male_var.set(0)
-            #         other_var.set(0)
-            #     elif checkbox == "other":
-            #         male_var.set(0)
-            #         female_var.set(0)
-            # gender_lbl = Label(ifrm, font=('arial', 16, 'bold'), bg='white', fg='#000', border=0, text="Gender:")
-            # gender_lbl.place(relx=.5, rely=.2)
-            # male_var = IntVar()
-            # female_var = IntVar()
-            # other_var = IntVar()
-            # gen_btn1 = Checkbutton(ifrm, text="Male", variable=male_var, onvalue=1, offvalue=0, width=10,fg='#000',bg='white',command=lambda: select_one("male"))
-            # gen_btn2 = Checkbutton(ifrm, text="Female", variable=female_var, onvalue=1, offvalue=0, width=10, fg='#000',bg='white',command=lambda: select_one("female"))
-            # gen_btn3 = Checkbutton(ifrm, text="Other", variable=other_var, onvalue=1, offvalue=0, width=10, fg='#000',bg='white',command=lambda: select_one("other"))
-            # gen_btn1.place(relx=.68, rely=.20)
-            # gen_btn2.place(relx=.77, rely=.20)
-            # gen_btn3.place(relx=.85, rely=.20)
+
             mob_lbl=Label(ifrm,font=('arial',16,'bold'),bg='white',fg='#000',border=0,text="Mobile Numabr:")
             mob_lbl.place(relx=.5, rely=.2)
             mob_entry=Entry(ifrm,font=('arial',16),bg='white',border=0,width=18)
@@ -2253,49 +2152,6 @@ def welcome_screen():
         ifrm.configure(bg="#d5d4fe")
         ifrm.place(relx=.1,rely=.13,relwidth=.82,relheight=.75)
         
-
-        # def deposit_db():            
-        #     amt = float(dep_entry.get())
-        #     conobj = sqlite3.connect(database="banking.sqlite")
-        #     curobj = conobj.cursor()
-        #     curobj.execute("SELECT balance FROM user_details WHERE user_id=?", (user_id,))
-        #     tup = curobj.fetchone()
-        #     if tup is not None:
-        #         bal = tup[0]
-        #     else:
-        #         bal = 0
-        #     curobj=conobj.cursor()
-        #     curobj.execute("UPDATE user_details SET balance = balance + ? WHERE user_id=?", (amt, user_id))
-        #     curobj.execute("INSERT INTO txns (user_id, txn_amt, txn_type, txn_update_bal, txn_date) VALUES (?, ?, ?, ?, ?)", (user_id, amt, 'Credit Amount', bal + amt, time.ctime()))
-        #     conobj.commit()
-        #     messagebox.showinfo("Deposit Amt", f"{amt} deposited ")
-        #     conobj.close()
-        # def deposit_db():
-            
-        #     amt=float(dep_entry.get())
-        #     conobj=sqlite3.connect(database="banking.sqlite")
-        #     curobj=conobj.cursor()
-        #     curobj.execute("select balance from user_details where user_id=?",(user_id,))
-        #     # tup=curobj.fetchone()
-        #     # bal=tup[0]
-            
-        #     tup = curobj.fetchone()
-        #     if tup is not None:
-        #         bal = tup[0]
-        #     else:
-        #         bal = 0
-            
-        #     if bal is None:
-        #         bal = 0
-        #     update_bal = bal+amt
-        #     curobj.close()
-        #     curobj=conobj.cursor()
-        #     curobj.execute("update user_details set balance=balance+? where user_id=?",(amt,user_id))
-        #     curobj.execute("insert into txns (user_id, txn_amt, txn_type, txn_update_bal, txn_date) values(?,?,?,?,?)",(user_id,amt,'Cr.',update_bal,time.ctime()))
-        #     conobj.commit()
-        #     conobj.close()
-
-        #     messagebox.showinfo("Deposit Amt",f"{amt} deposited ")
         def deposit_db():
             amt = float(dep_entry.get())
             
